@@ -22,6 +22,7 @@ addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 90
 
 [tool.coverage.run]
 source = ["pbs"]
+omit = ["src/pbs/etl/extraction.py", "src/pbs/utils.py", "src/pbs/logger.py"]
 
 [project.urls]
 homepage = "https://github.com/PabloRMira/pbs-backend"

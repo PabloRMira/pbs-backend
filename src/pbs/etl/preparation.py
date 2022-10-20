@@ -17,9 +17,8 @@ def prepare_bis_features(
         time_colname: "time",
         **{country + field_identifier: country for country in countries},
     }
-    cols = cols_map.values()
     return (
-        df.rename(columns=cols_map)[cols]
+        df.rename(columns=cols_map)[cols_map.values()]
         .melt(
             id_vars="time",
             value_vars=countries,
@@ -59,7 +58,3 @@ def prepare_credit_to_gdp_data(df: pd.DataFrame):
 
 def prepare_hpi_data(df: pd.DataFrame):
     return prepare_bis_features(df, ETLConfig.HPI_COUNTRIES, "", "hpi", "Unnamed: 0")
-
-
-def prepare_crisis_indicator(df: pd.DataFrame) -> pd.DataFrame:
-    pass
