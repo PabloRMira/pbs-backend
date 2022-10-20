@@ -84,5 +84,5 @@ def prepare_data(input_dir: str, output_path: str):
                 for name, funcs in preparation_steps.items()
             ]
         ),
-    )
+    ).sort_values(by=["country", "time"], ascending=True)
     df.to_parquet(output_path, index=False)

@@ -133,10 +133,10 @@ stages:
     deps:
     - path: scripts/stages/prepare.py
       md5: 027e9f8bc1a8448d5b9a61fc33ab061b
-      size: 222
+      size: 211
     - path: src/pbs/etl/preparation.py
-      md5: ac66ac16766836fa318ba372701e7df1
-      size: 2426
+      md5: 5b9af1978af140e3f76bffb5029962e1
+      size: 2478
     params:
       params.yaml:
         extract:
@@ -151,5 +151,5 @@ stages:
           output_path: data/prepared/data.parquet
     outs:
     - path: data/prepared/data.parquet
-      md5: 63f40510f239a2f4f682693be1cf589c
-      size: 124783
+      md5: 6217bb15b0d580a41d44bfdd88f8de86
+      size: 129841
