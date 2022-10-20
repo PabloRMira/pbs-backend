@@ -1,0 +1,44 @@
+repos:
+  - repo: local
+    hooks:
+      - id: black
+        name: "black: code formatting"
+        language: system
+        entry: black
+        types: [python]
+      - id: flake8
+        name: "flake8: syntax checking"
+        language: system
+        entry: flake8 --config=.flake8
+        types: [python]
+      - id: isort
+        name: "isort: imports sorting"
+        language: system
+        verbose: true
+        entry: isort
+        types: [python]
+      - id: mypy
+        name: "mypy: type checking"
+        language: system
+        entry: mypy --no-strict-optional --ignore-missing-imports
+        types: [python]
+        require_serial: true
+      - id: trailing-whitespace
+        name: trim trailing-whitespace
+        entry: trailing-whitespace-fixer
+        language: python
+      - id: end-of-file-fixer
+        name: fix end of files
+        entry: end-of-file-fixer
+        language: python
+      - id: mixed-line-ending
+        name: mixed line ending
+        entry: mixed-line-ending
+        language: python
+        args: ["--fix", "lf"]
+      - id: bandit
+        name: bandit
+        entry: bandit
+        args: ["--skip", "B301,B403", "--exclude", "tests/*"]
+        language: python
+        types: [python]

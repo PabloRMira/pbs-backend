@@ -1,0 +1,53 @@
+[project]
+name = "pbs"
+dynamic = ["version"]
+license = {text = "Pablo Rodriguez Mira"}
+description = "Backend for predicting black swans"
+authors = [{name = "Pablo Rodriguez Mira"}]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10"
+]
+readme = "README.md"
+dependencies = []
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 90"
+
+[tool.coverage.run]
+source = ["pbs"]
+
+[project.urls]
+homepage = "https://github.com/PabloRMira/pbs-backend"
+repository = "https://github.com/PabloRMira/pbs-backend"
+
+[tool.black]
+line-length = 100
+include = '.pyi?$'
+exclude = '''
+/(
+     \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+)/
+'''
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+line_length = 100
+
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+local_scheme = "node-and-timestamp"
+version_scheme = "no-guess-dev"
+write_to = "src/pbs/_version.py"

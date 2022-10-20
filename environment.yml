@@ -1,0 +1,25 @@
+name: pbs-backend
+dependencies:
+  - python=3.10
+  - dill
+  - numpy
+  - pandas
+  - scikit-learn
+  - lightgbm
+  - matplotlib
+  - seaborn
+  - pydantic
+  - pytest
+  - pytest-cov
+  - uvicorn
+  - fastapi
+  - dvc
+  - bandit
+  - black
+  - flake8
+  - isort
+  - mypy
+  - pre-commit
+  - pre-commit-hooks
+  - ipykernel
+  - setuptools-scm
