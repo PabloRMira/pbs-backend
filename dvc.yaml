@@ -13,3 +13,16 @@ stages:
         - src/pbs/etl/extraction.py
       outs:
         - ${extract.output_dir}/${item}.parquet
+  prepare:
+    cmd: >-
+      python scripts/stages/prepare.py
+      --input-dir=${extract.output_dir}
+      --output-path=${prepare.output_path}
+    params:
+      - extract
+      - prepare
+    deps:
+      - scripts/stages/prepare.py
+      - src/pbs/etl/preparation.py
+    outs:
+      - ${prepare.output_path}

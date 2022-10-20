@@ -128,3 +128,28 @@ stages:
     - path: data/input/cpi.parquet
       md5: b124768f1b9d48867fbcd8099b3f382b
       size: 101905
+  prepare:
+    cmd: python scripts/stages/prepare.py --input-dir=data/input --output-path=data/prepared/data.parquet
+    deps:
+    - path: scripts/stages/prepare.py
+      md5: 027e9f8bc1a8448d5b9a61fc33ab061b
+      size: 222
+    - path: src/pbs/etl/preparation.py
+      md5: ac66ac16766836fa318ba372701e7df1
+      size: 2426
+    params:
+      params.yaml:
+        extract:
+          output_dir: data/input
+          name:
+          - credit
+          - hpi
+          - cpi
+          - ishort
+          - ilong
+        prepare:
+          output_path: data/prepared/data.parquet
+    outs:
+    - path: data/prepared/data.parquet
+      md5: 63f40510f239a2f4f682693be1cf589c
+      size: 124783
