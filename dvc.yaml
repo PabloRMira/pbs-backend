@@ -1,0 +1,10 @@
+stages:
+  extract:
+    cmd: >-
+      python scripts/stages/extract.py
+      --output-dir=${extract.output_dir}
+    params:
+      - extract
+    deps:
+      - scripts/stages/extract.py
+      - src/pbs/etl/extraction.py

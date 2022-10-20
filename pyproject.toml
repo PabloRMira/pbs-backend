@@ -9,7 +9,13 @@ classifiers = [
     "Programming Language :: Python :: 3.10"
 ]
 readme = "README.md"
-dependencies = []
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "requests",
+    "openpyxl"
+]
 
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 90"

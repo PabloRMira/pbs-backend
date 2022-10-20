@@ -23,3 +23,6 @@ dependencies:
   - pre-commit-hooks
   - ipykernel
   - setuptools-scm
+  - types-requests
+  - openpyxl
+  - pyarrow

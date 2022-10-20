@@ -1,0 +1,15 @@
+schema: '2.0'
+stages:
+  extract:
+    cmd: python scripts/stages/extract.py --output-dir=data/input
+    deps:
+    - path: scripts/stages/extract.py
+      md5: a5c69a4aa422bcf70578b8e02b99de4e
+      size: 192
+    - path: src/pbs/etl/extraction.py
+      md5: 9fcaec5d2dba96bdd983cc0243d300dc
+      size: 4714
+    params:
+      params.yaml:
+        extract:
+          output_dir: data/input

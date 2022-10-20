@@ -8,3 +8,4 @@ pre-commit-hooks
 pytest
 pytest-cov
 setuptools-scm
+types-requests
