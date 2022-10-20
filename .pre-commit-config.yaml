@@ -14,7 +14,6 @@ repos:
       - id: isort
         name: "isort: imports sorting"
         language: system
-        verbose: true
         entry: isort
         types: [python]
       - id: mypy
