@@ -1,2 +1,8 @@
 extract:
   output_dir: data/input
+  name:
+    - credit
+    - hpi
+    - cpi
+    - ishort
+    - ilong

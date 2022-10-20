@@ -134,17 +134,16 @@ def fetch_ilong() -> pd.DataFrame:
 
 
 @log_step
-def extract_data(output_dir: str):
+def extract_data(name: str, output_dir: str):
     output_dirpath = Path(output_dir)
     output_dirpath.mkdir(parents=True, exist_ok=True)
-    extractions = {
+    func = {
         "credit": fetch_credit_data,
         "hpi": fetch_hpi_data,
         "cpi": fetch_cpi,
         "ishort": fetch_ishort,
         "ilong": fetch_ilong,
-    }
-    for name, func in extractions.items():
-        logger.info(f"Extracting {name} data")
-        output_path = output_dirpath.joinpath(f"{name}.parquet")
-        func().to_parquet(output_path, index=False)
+    }[name]
+    logger.info(f"Extracting {name} data")
+    output_path = output_dirpath.joinpath(f"{name}.parquet")
+    func().to_parquet(output_path, index=False)

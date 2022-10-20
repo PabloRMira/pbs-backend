@@ -5,11 +5,126 @@ stages:
     deps:
     - path: scripts/stages/extract.py
       md5: a5c69a4aa422bcf70578b8e02b99de4e
-      size: 192
+      size: 181
     - path: src/pbs/etl/extraction.py
-      md5: 9fcaec5d2dba96bdd983cc0243d300dc
-      size: 4714
+      md5: 36df00c284f0a3076904e3f8a4483fa5
+      size: 4564
     params:
       params.yaml:
         extract:
           output_dir: data/input
+  extract@credit:
+    cmd: python scripts/stages/extract.py --name=credit --output-dir=data/input
+    deps:
+    - path: scripts/stages/extract.py
+      md5: 91be9b73afefb33528d3dd20de846a7b
+      size: 198
+    - path: src/pbs/etl/extraction.py
+      md5: 4d5bab2b2184bb25affdfed495b537c9
+      size: 4519
+    params:
+      params.yaml:
+        extract:
+          output_dir: data/input
+          name:
+          - credit
+          - hpi
+          - cpi
+          - ishort
+          - ilong
+    outs:
+    - path: data/input/credit.parquet
+      md5: bb1738093bbfc898673146109f9e6262
+      size: 3059972
+  extract@ishort:
+    cmd: python scripts/stages/extract.py --name=ishort --output-dir=data/input
+    deps:
+    - path: scripts/stages/extract.py
+      md5: 91be9b73afefb33528d3dd20de846a7b
+      size: 198
+    - path: src/pbs/etl/extraction.py
+      md5: 4d5bab2b2184bb25affdfed495b537c9
+      size: 4519
+    params:
+      params.yaml:
+        extract:
+          output_dir: data/input
+          name:
+          - credit
+          - hpi
+          - cpi
+          - ishort
+          - ilong
+    outs:
+    - path: data/input/ishort.parquet
+      md5: 0e7edfa83a16427c066a6562ac83ce10
+      size: 38801
+  extract@hpi:
+    cmd: python scripts/stages/extract.py --name=hpi --output-dir=data/input
+    deps:
+    - path: scripts/stages/extract.py
+      md5: 91be9b73afefb33528d3dd20de846a7b
+      size: 198
+    - path: src/pbs/etl/extraction.py
+      md5: 4d5bab2b2184bb25affdfed495b537c9
+      size: 4519
+    params:
+      params.yaml:
+        extract:
+          output_dir: data/input
+          name:
+          - credit
+          - hpi
+          - cpi
+          - ishort
+          - ilong
+    outs:
+    - path: data/input/hpi.parquet
+      md5: cda565657cbed01461f83a538d40b721
+      size: 57063
+  extract@ilong:
+    cmd: python scripts/stages/extract.py --name=ilong --output-dir=data/input
+    deps:
+    - path: scripts/stages/extract.py
+      md5: 91be9b73afefb33528d3dd20de846a7b
+      size: 198
+    - path: src/pbs/etl/extraction.py
+      md5: 4d5bab2b2184bb25affdfed495b537c9
+      size: 4519
+    params:
+      params.yaml:
+        extract:
+          output_dir: data/input
+          name:
+          - credit
+          - hpi
+          - cpi
+          - ishort
+          - ilong
+    outs:
+    - path: data/input/ilong.parquet
+      md5: de0661d443d6cafddc99b4f3d280f4f6
+      size: 45492
+  extract@cpi:
+    cmd: python scripts/stages/extract.py --name=cpi --output-dir=data/input
+    deps:
+    - path: scripts/stages/extract.py
+      md5: 91be9b73afefb33528d3dd20de846a7b
+      size: 198
+    - path: src/pbs/etl/extraction.py
+      md5: 4d5bab2b2184bb25affdfed495b537c9
+      size: 4519
+    params:
+      params.yaml:
+        extract:
+          output_dir: data/input
+          name:
+          - credit
+          - hpi
+          - cpi
+          - ishort
+          - ilong
+    outs:
+    - path: data/input/cpi.parquet
+      md5: b124768f1b9d48867fbcd8099b3f382b
+      size: 101905

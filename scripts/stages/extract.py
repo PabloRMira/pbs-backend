@@ -3,8 +3,8 @@ from pbs.etl.extraction import extract_data
 
 
 @make_cli
-def main(output_dir: str):
-    extract_data(output_dir)
+def main(name: str, output_dir: str):
+    extract_data(name, output_dir)
 
 
 if __name__ == "__main__":

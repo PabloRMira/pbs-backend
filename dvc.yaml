@@ -1,10 +1,15 @@
 stages:
   extract:
-    cmd: >-
-      python scripts/stages/extract.py
-      --output-dir=${extract.output_dir}
-    params:
-      - extract
-    deps:
-      - scripts/stages/extract.py
-      - src/pbs/etl/extraction.py
+    foreach: ${extract.name}
+    do:
+      cmd: >-
+        python scripts/stages/extract.py
+        --name=${item}
+        --output-dir=${extract.output_dir}
+      params:
+        - extract
+      deps:
+        - scripts/stages/extract.py
+        - src/pbs/etl/extraction.py
+      outs:
+        - ${extract.output_dir}/${item}.parquet
