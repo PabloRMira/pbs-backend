@@ -5,3 +5,4 @@ src/pbs/_version.py
 __pycache__
 .coverage
 dvc_plots/
+.vscode/
