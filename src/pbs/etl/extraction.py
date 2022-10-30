@@ -133,6 +133,14 @@ def fetch_ilong() -> pd.DataFrame:
     )
 
 
+def extract_crisis_database() -> pd.DataFrame:
+    return pd.read_csv(
+        Path(__file__).parent.parent.parent.parent.joinpath(
+            "data/crises/financial_crises_selection.csv"
+        )
+    )
+
+
 @log_step
 def extract_data(name: str, output_dir: str):
     output_dirpath = Path(output_dir)
@@ -143,6 +151,7 @@ def extract_data(name: str, output_dir: str):
         "cpi": fetch_cpi,
         "ishort": fetch_ishort,
         "ilong": fetch_ilong,
+        "crises": extract_crisis_database,
     }[name]
     logger.info(f"Extracting {name} data")
     output_path = output_dirpath.joinpath(f"{name}.parquet")

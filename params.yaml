@@ -6,5 +6,6 @@ extract:
     - cpi
     - ishort
     - ilong
+    - crises
 prepare:
   output_path: data/prepared/data.parquet

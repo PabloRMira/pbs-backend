@@ -20,8 +20,8 @@ stages:
       md5: 91be9b73afefb33528d3dd20de846a7b
       size: 198
     - path: src/pbs/etl/extraction.py
-      md5: 4d5bab2b2184bb25affdfed495b537c9
-      size: 4519
+      md5: d17457ce33d7b5881ee7ff6e5bd6a615
+      size: 4769
     params:
       params.yaml:
         extract:
@@ -32,6 +32,7 @@ stages:
           - cpi
           - ishort
           - ilong
+          - crises
     outs:
     - path: data/input/credit.parquet
       md5: bb1738093bbfc898673146109f9e6262
@@ -43,8 +44,8 @@ stages:
       md5: 91be9b73afefb33528d3dd20de846a7b
       size: 198
     - path: src/pbs/etl/extraction.py
-      md5: 4d5bab2b2184bb25affdfed495b537c9
-      size: 4519
+      md5: d17457ce33d7b5881ee7ff6e5bd6a615
+      size: 4769
     params:
       params.yaml:
         extract:
@@ -55,6 +56,7 @@ stages:
           - cpi
           - ishort
           - ilong
+          - crises
     outs:
     - path: data/input/ishort.parquet
       md5: 0e7edfa83a16427c066a6562ac83ce10
@@ -66,8 +68,8 @@ stages:
       md5: 91be9b73afefb33528d3dd20de846a7b
       size: 198
     - path: src/pbs/etl/extraction.py
-      md5: 4d5bab2b2184bb25affdfed495b537c9
-      size: 4519
+      md5: d17457ce33d7b5881ee7ff6e5bd6a615
+      size: 4769
     params:
       params.yaml:
         extract:
@@ -78,6 +80,7 @@ stages:
           - cpi
           - ishort
           - ilong
+          - crises
     outs:
     - path: data/input/hpi.parquet
       md5: cda565657cbed01461f83a538d40b721
@@ -89,8 +92,8 @@ stages:
       md5: 91be9b73afefb33528d3dd20de846a7b
       size: 198
     - path: src/pbs/etl/extraction.py
-      md5: 4d5bab2b2184bb25affdfed495b537c9
-      size: 4519
+      md5: d17457ce33d7b5881ee7ff6e5bd6a615
+      size: 4769
     params:
       params.yaml:
         extract:
@@ -101,6 +104,7 @@ stages:
           - cpi
           - ishort
           - ilong
+          - crises
     outs:
     - path: data/input/ilong.parquet
       md5: de0661d443d6cafddc99b4f3d280f4f6
@@ -112,8 +116,8 @@ stages:
       md5: 91be9b73afefb33528d3dd20de846a7b
       size: 198
     - path: src/pbs/etl/extraction.py
-      md5: 4d5bab2b2184bb25affdfed495b537c9
-      size: 4519
+      md5: d17457ce33d7b5881ee7ff6e5bd6a615
+      size: 4769
     params:
       params.yaml:
         extract:
@@ -124,10 +128,11 @@ stages:
           - cpi
           - ishort
           - ilong
+          - crises
     outs:
     - path: data/input/cpi.parquet
-      md5: b124768f1b9d48867fbcd8099b3f382b
-      size: 101905
+      md5: 66fbcea67e3260290105d8eda86c5789
+      size: 102218
   prepare:
     cmd: python scripts/stages/prepare.py --input-dir=data/input --output-path=data/prepared/data.parquet
     deps:
@@ -147,9 +152,34 @@ stages:
           - cpi
           - ishort
           - ilong
+          - crises
         prepare:
           output_path: data/prepared/data.parquet
     outs:
     - path: data/prepared/data.parquet
       md5: 6217bb15b0d580a41d44bfdd88f8de86
       size: 129841
+  extract@crises:
+    cmd: python scripts/stages/extract.py --name=crises --output-dir=data/input
+    deps:
+    - path: scripts/stages/extract.py
+      md5: 91be9b73afefb33528d3dd20de846a7b
+      size: 198
+    - path: src/pbs/etl/extraction.py
+      md5: d17457ce33d7b5881ee7ff6e5bd6a615
+      size: 4769
+    params:
+      params.yaml:
+        extract:
+          output_dir: data/input
+          name:
+          - credit
+          - hpi
+          - cpi
+          - ishort
+          - ilong
+          - crises
+    outs:
+    - path: data/input/crises.parquet
+      md5: 1d899d15b884108e84b1278f0232bc2a
+      size: 3776

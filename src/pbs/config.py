@@ -123,3 +123,5 @@ class ETLConfig:
         "RUS": "Russia",
         "BRA": "Brazil",
     }
+    CRISIS_QUARTER_LENGTH = 20
+    PRECRISIS_QUARTER_LENGTH = 12

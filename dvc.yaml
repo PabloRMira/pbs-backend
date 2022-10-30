@@ -22,6 +22,7 @@ stages:
       - extract
       - prepare
     deps:
+      - ${extract.output_dir}
       - scripts/stages/prepare.py
       - src/pbs/etl/preparation.py
     outs:
