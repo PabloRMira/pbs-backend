@@ -1,7 +1,7 @@
 import functools
 import itertools
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Union
 
 import pandas as pd
 
@@ -92,7 +92,7 @@ def prepare_crises_data(df: pd.DataFrame):
                                 + pd.offsets.QuarterEnd(ETLConfig.CRISIS_QUARTER_LENGTH),
                                 freq="Q",
                             ),
-                            "housing_crisis": 2 if row["housing_bubble"] == 1 else 0,
+                            "housing_crisis": 2 if row["financial_crisis"] == 1 else 0,
                             "financial_crisis": 2 if row["financial_crisis"] == 1 else 0,
                         }
                     ),
@@ -106,6 +106,10 @@ def prepare_crises_data(df: pd.DataFrame):
     ).sort_values(by=["country", "time"])
 
 
+def fill_nas(df: pd.DataFrame, columns: List[str], value: Union[int, float, str]):
+    return df.assign(**{column: df[column].fillna(value) for column in columns})
+
+
 @log_step
 def prepare_data(input_dir: str, output_path: str):
     input_dirpath = Path(input_dir)
@@ -116,16 +120,20 @@ def prepare_data(input_dir: str, output_path: str):
         "hpi": [prepare_hpi_data],
         "crises": [prepare_crises_data],
     }
-    df = functools.reduce(
-        lambda df1, df2: pd.merge(df1, df2, on=["country", "time"], how="outer"),
-        itertools.chain.from_iterable(
-            [
+    df = (
+        functools.reduce(
+            lambda df1, df2: pd.merge(df1, df2, on=["country", "time"], how="outer"),
+            itertools.chain.from_iterable(
                 [
-                    pd.read_parquet(input_dirpath.joinpath(f"{name}.parquet")).pipe(func)
-                    for func in funcs
+                    [
+                        pd.read_parquet(input_dirpath.joinpath(f"{name}.parquet")).pipe(func)
+                        for func in funcs
+                    ]
+                    for name, funcs in preparation_steps.items()
                 ]
-                for name, funcs in preparation_steps.items()
-            ]
-        ),
-    ).sort_values(by=["country", "time"], ascending=True)
+            ),
+        )
+        .pipe(fill_nas, columns=["housing_crisis", "financial_crisis"], value=0)
+        .sort_values(by=["country", "time"], ascending=True)
+    )
     df.to_parquet(output_path, index=False)

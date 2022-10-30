@@ -9,3 +9,5 @@ extract:
     - crises
 prepare:
   output_path: data/prepared/data.parquet
+split:
+  output_path: data/split/data.parquet

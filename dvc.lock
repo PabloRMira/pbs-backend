@@ -136,12 +136,16 @@ stages:
   prepare:
     cmd: python scripts/stages/prepare.py --input-dir=data/input --output-path=data/prepared/data.parquet
     deps:
+    - path: data/input
+      md5: feaae458c142529be1d9276060ff699b.dir
+      size: 3307411
+      nfiles: 7
     - path: scripts/stages/prepare.py
       md5: 027e9f8bc1a8448d5b9a61fc33ab061b
       size: 211
     - path: src/pbs/etl/preparation.py
-      md5: 5b9af1978af140e3f76bffb5029962e1
-      size: 2478
+      md5: cc7fa1960608c620a6014e3c8c5028a3
+      size: 4549
     params:
       params.yaml:
         extract:
@@ -157,8 +161,8 @@ stages:
           output_path: data/prepared/data.parquet
     outs:
     - path: data/prepared/data.parquet
-      md5: 6217bb15b0d580a41d44bfdd88f8de86
-      size: 129841
+      md5: 0b485b5743da148dcbda89e7b2cda26a
+      size: 131691
   extract@crises:
     cmd: python scripts/stages/extract.py --name=crises --output-dir=data/input
     deps:
@@ -183,3 +187,25 @@ stages:
     - path: data/input/crises.parquet
       md5: 1d899d15b884108e84b1278f0232bc2a
       size: 3776
+  split:
+    cmd: python scripts/stages/split.py --input-path=data/prepared/data.parquet --output-path=data/split/data.parquet
+    deps:
+    - path: data/prepared/data.parquet
+      md5: 0b485b5743da148dcbda89e7b2cda26a
+      size: 131691
+    - path: scripts/stages/split.py
+      md5: d7819b8359b0a25c23a7224dc7c04801
+      size: 214
+    - path: src/pbs/etl/split.py
+      md5: 64cb7915bbe9dd8908f17eadbd8c9cd6
+      size: 1258
+    params:
+      params.yaml:
+        prepare:
+          output_path: data/prepared/data.parquet
+        split:
+          output_path: data/split/data.parquet
+    outs:
+    - path: data/split/data.parquet
+      md5: f8fcdec405aafe7d5e38d42b0f2eeb42
+      size: 47941

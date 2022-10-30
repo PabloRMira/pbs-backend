@@ -27,3 +27,17 @@ stages:
       - src/pbs/etl/preparation.py
     outs:
       - ${prepare.output_path}
+  split:
+    cmd: >-
+      python scripts/stages/split.py
+      --input-path=${prepare.output_path}
+      --output-path=${split.output_path}
+    params:
+      - prepare
+      - split
+    deps:
+      - ${prepare.output_path}
+      - scripts/stages/split.py
+      - src/pbs/etl/split.py
+    outs:
+      - ${split.output_path}

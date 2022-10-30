@@ -125,3 +125,6 @@ class ETLConfig:
     }
     CRISIS_QUARTER_LENGTH = 20
     PRECRISIS_QUARTER_LENGTH = 12
+    RESPONSE = "housing_crisis"
+    TEST_SPLIT_DATE = "2001-01-31"
+    ID_COLUMNS = ["country", "time"]
